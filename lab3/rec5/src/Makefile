@@ -18,7 +18,7 @@ CFLAGS += -U_FORTIFY_SOURCE
 .PHONY: all
 all: $(PROJECT)
 
-activity: activity.o support.o support_asm.o
+activity: activity.o support.o support_asm.o farm.o
 
 .PHONY: clean
 clean:
