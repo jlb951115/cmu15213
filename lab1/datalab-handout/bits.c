@@ -165,7 +165,7 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-	return !(~x^(x+1))&!!(x^~0);
+  return !(~x^(x+1))&!!(x^~0);
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -187,7 +187,7 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-	return ~x+1;
+  return ~x+1;
 }
 //3
 /* 
@@ -235,7 +235,7 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int logicalNeg(int x) {
-	return ((x|(~x+1))>>31)+1;
+  return ((x|(~x+1))>>31)+1;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
@@ -309,7 +309,7 @@ int floatFloat2Int(unsigned uf) {
 	else if (shift < 23)
 		return (frac>>(23-shift)) + (1<<shift) + (sign>>comp);
 	else
-		return (frac<<(23-shift)) + (1<<shift) + (sign>>comp);
+		return (frac<<(shift-23)) + (1<<shift) + (sign>>comp);
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
