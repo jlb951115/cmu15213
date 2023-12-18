@@ -15,8 +15,8 @@ team_t team = {
     "Harry Q. Bovik",     /* First member full name */
     "bovik@nowhere.edu",  /* First member email address */
 
-    "",                   /* Second member full name (leave blank if none) */
-    ""                    /* Second member email addr (leave blank if none) */
+    "linbojiang",                   /* Second member full name (leave blank if none) */
+    "30656549450@qq.com"                    /* Second member email addr (leave blank if none) */
 };
 
 /***************
