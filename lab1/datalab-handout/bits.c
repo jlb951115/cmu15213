@@ -143,7 +143,7 @@ NOTES:
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-	return ~(~(~x & y) & ~(x & ~y));
+	return ~(~(x & ~y) & ~(~x & y));
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -201,7 +201,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return !(((x + 6) & ~0x0f) ^ 0x30) & !((x & 0xf0) ^ 0x30);
+	return !(((x + 6) & ~0x0f) ^ 0x30) & !((x & 0xf0) ^ 0x30);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -277,10 +277,10 @@ unsigned floatScale2(unsigned uf) {
 	unsigned ref = 0xff << 23;
 	unsigned exp = uf & ref;
 	unsigned sign = uf & (1 << 31);
-	if (exp == 0)
-		return (uf << 1) + sign;
-	else if (exp == ref)
+	if (exp == ref)
 		return uf;
+	else if (exp == 0)
+		return (uf << 1) + sign;
 	else
 		return uf + (1 << 23);
 }
