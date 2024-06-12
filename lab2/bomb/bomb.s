@@ -1,5 +1,5 @@
 
-./bomb:     file format elf64-x86-64
+bomb：     文件格式 elf64-x86-64
 
 
 Disassembly of section .init:
@@ -666,7 +666,7 @@ Disassembly of section .text:
   4012bd:	bf 01 00 00 00       	mov    $0x1,%edi
   4012c2:	b8 00 00 00 00       	mov    $0x0,%eax
   4012c7:	e8 34 f9 ff ff       	callq  400c00 <__printf_chk@plt>
-  4012cc:	48 8b 3d 6d 24 20 00 	mov    0x20246d(%rip),%rdi        # 603740 <__bss_start>
+  4012cc:	48 8b 3d 6d 24 20 00 	mov    0x20246d(%rip),%rdi        # 603740 <stdout@@GLIBC_2.2.5>
   4012d3:	e8 08 f9 ff ff       	callq  400be0 <fflush@plt>
   4012d8:	bf 01 00 00 00       	mov    $0x1,%edi
   4012dd:	e8 6e f9 ff ff       	callq  400c50 <sleep@plt>
@@ -1694,7 +1694,7 @@ Disassembly of section .text:
 0000000000402210 <__libc_csu_init>:
   402210:	48 89 6c 24 d8       	mov    %rbp,-0x28(%rsp)
   402215:	4c 89 64 24 e0       	mov    %r12,-0x20(%rsp)
-  40221a:	48 8d 2d df 0b 20 00 	lea    0x200bdf(%rip),%rbp        # 602e00 <__init_array_end>
+  40221a:	48 8d 2d df 0b 20 00 	lea    0x200bdf(%rip),%rbp        # 602e00 <__do_global_dtors_aux_fini_array_entry>
   402221:	4c 8d 25 d0 0b 20 00 	lea    0x200bd0(%rip),%r12        # 602df8 <__frame_dummy_init_array_entry>
   402228:	4c 89 6c 24 e8       	mov    %r13,-0x18(%rsp)
   40222d:	4c 89 74 24 f0       	mov    %r14,-0x10(%rsp)

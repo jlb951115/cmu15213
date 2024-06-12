@@ -165,7 +165,8 @@ int tmin(void) {
  *   Rating: 1
  */
 int isTmax(int x) {
-  return !((x + 1) ^ ~x) & !!(x + 1);
+	int sign = x + 1;
+	return !(sign ^ ~x) & !!sign;
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -200,7 +201,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return !(((x + 0x06) & ~0x0f) ^ 0x30) & !((x & 0xf0) ^ 0x30);
+  return !(((x + 6) & ~0x0f) ^ 0x30) & !((x & 0xf0) ^ 0x30);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -251,7 +252,7 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
 	int sign = x >> 31;
-	x = (~x & sign) | (x & ~sign);
+	x = (~sign & x) | (sign & ~x);
 	sign = (!!(x >> 16)) << 4;
 	sign = sign + ((!!(x >> (sign + 8))) << 3);
 	sign = sign + ((!!(x >> (sign + 4))) << 2);
@@ -274,8 +275,8 @@ int howManyBits(int x) {
  */
 unsigned floatScale2(unsigned uf) {
 	unsigned ref = 0xff << 23;
-	unsigned sign = uf & (1 << 31);
 	unsigned exp = uf & ref;
+	unsigned sign = uf & (1 << 31);
 	if (exp == 0)
 		return (uf << 1) + sign;
 	else if (exp == ref)
