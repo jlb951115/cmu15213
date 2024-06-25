@@ -143,7 +143,7 @@ NOTES:
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return ~(~(~x & y) & ~(x & ~y));
+    return ~(~(~x & y) & ~(x & ~y));
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -153,7 +153,7 @@ int bitXor(int x, int y) {
  */
 int tmin(void) {
 
-  return 1 << 31;
+  return 1 << 31;;
 
 }
 //2
@@ -178,8 +178,10 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-    int sign = 0xaa + (0xaa << 8) + (0xaa << 16) + (0xaa << 24);
-    return !((x & sign) ^ sign);
+  int sign = 0xaa;
+  sign = sign + (sign << 8);
+  sign = sign + (sign << 16);
+  return !((x & sign) ^ sign);
 }
 /* 
  * negate - return -x 
@@ -202,7 +204,7 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-    return !((((x + 6) & ~0x0f) ^ 0x30) | ((x & 0xf0) ^ 0x30));
+    return !(((x & ~0x0f) ^ 0x30) | (((x + 6) & 0xf0) ^ 0x30));
 }
 /* 
  * conditional - same as x ? y : z 
@@ -224,7 +226,7 @@ int conditional(int x, int y, int z) {
  */
 int isLessOrEqual(int x, int y) {
     int sign_x = (x >> 31) & 0x01;
-    int sign_y =  !((y >> 31) & 0x01);
+    int sign_y = !((y >> 31) & 0x01);
     return (sign_x | sign_y) & ((sign_x & sign_y) | (((y + ~x + 1) >> 31) + 1));
 }
 //4
@@ -253,7 +255,7 @@ int logicalNeg(int x) {
  */
 int howManyBits(int x) {
     int sign = x >> 31;
-    x = (sign & ~x) | (~sign & x);
+    x = (~sign & x) | (sign & ~x);
     sign = (!!(x >> 16)) << 4;
     sign = sign + ((!!(x >> (sign + 8))) << 3);
     sign = sign + ((!!(x >> (sign + 4))) << 2);
@@ -276,8 +278,8 @@ int howManyBits(int x) {
  */
 unsigned floatScale2(unsigned uf) {
     unsigned ref = 0xff << 23;
-    unsigned exp = uf & ref;
     unsigned sign = uf & (1 << 31);
+    unsigned exp = uf & ref;
     if (exp == 0)
       return (uf << 1) + sign;
     else if (exp == ref)
