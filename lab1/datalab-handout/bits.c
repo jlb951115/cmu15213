@@ -178,8 +178,7 @@ int isTmax(int x) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-	int sign = 0xaa;
-	sign = sign + (sign << 8);
+	int sign = 0xaa + (0xaa << 8);
 	sign = sign + (sign << 16);
 	return !((x & sign) ^ sign);
 }
@@ -225,8 +224,8 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-	int sign_x = (x >> 31) & 0x01;
-	int sign_y = !((y >> 31) & 0x01);
+	int sign_x = (x >> 31) & 1;
+	int sign_y = !((y >> 31) & 1);
 	return (sign_x | sign_y) & ((sign_x & sign_y) | (((y + ~x + 1) >> 31) + 1));
 }
 //4
@@ -260,7 +259,7 @@ int howManyBits(int x) {
 	sign = sign + ((!!(x >> (sign + 8))) << 3);
 	sign = sign + ((!!(x >> (sign + 4))) << 2);
 	sign = sign + ((!!(x >> (sign + 2))) << 1);
-	sign = sign + !!(x >> (sign + 1));
+	sign = sign + (x >> (sign + 1));
 	sign = sign + (x >> sign);
 	return sign + 1;
 }
@@ -278,12 +277,12 @@ int howManyBits(int x) {
  */
 unsigned floatScale2(unsigned uf) {
 	unsigned ref = 0xff << 23;
-	unsigned sign = uf & (1 << 31);
 	unsigned exp = uf & ref;
-	if (exp == ref)
-		return uf;
-	else if (exp == 0)
+	unsigned sign = uf & (1 << 31);
+	if (exp == 0)
 		return (uf << 1) + sign;
+	else if (exp == ref)
+		return uf;
 	else
 		return uf + (1 << 23);
 }
@@ -303,18 +302,17 @@ int floatFloat2Int(unsigned uf) {
 	int ref = 1 << 31;
 	int sign = uf & ref;
 	int exp = uf & (0xff << 23);
-	int frac = uf - sign - exp;
+	int frac = uf - exp - sign;
 	int shift = (exp >> 23) - 0x7f;
-	int ref1 = 1 << shift;
-	int ref2 = sign >> (30 - shift);
+	int ref1 = (1 << shift) + (sign >> (30 - shift));
 	if (shift < 0)
 		return 0;
 	else if (shift >= 31)
 		return ref;
 	else if (shift < 23)
-		return (frac >> (23 - shift)) + ref1 + ref2;
+		return (frac >> (23 - shift)) + ref1;
 	else
-		return (frac << (shift - 23)) + ref1 + ref2;
+		return (frac << (shift - 23)) + ref1;
 }
 /* 
  * floatPower2 - Return bit-level equivalent of the expression 2.0^x
