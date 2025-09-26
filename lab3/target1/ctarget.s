@@ -2217,7 +2217,7 @@ Disassembly of section .text:
 0000000000402ce0 <__libc_csu_init>:
   402ce0:	48 89 6c 24 d8       	mov    %rbp,-0x28(%rsp)
   402ce5:	4c 89 64 24 e0       	mov    %r12,-0x20(%rsp)
-  402cea:	48 8d 2d 0f 11 20 00 	lea    0x20110f(%rip),%rbp        # 603e00 <__init_array_end>
+  402cea:	48 8d 2d 0f 11 20 00 	lea    0x20110f(%rip),%rbp        # 603e00 <__do_global_dtors_aux_fini_array_entry>
   402cf1:	4c 8d 25 00 11 20 00 	lea    0x201100(%rip),%r12        # 603df8 <__frame_dummy_init_array_entry>
   402cf8:	4c 89 6c 24 e8       	mov    %r13,-0x18(%rsp)
   402cfd:	4c 89 74 24 f0       	mov    %r14,-0x10(%rsp)
